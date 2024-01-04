@@ -1,6 +1,6 @@
 from django.db import models
 
-# Import user model
+# Import from user model
 
 
 class Store(models.Model):
@@ -25,7 +25,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products")
-    store = models.ForeignKey(Store, on_delete=models.CASCASE, related_name="products")
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name="products")
     productName = models.CharField(max_length=64)
     description = models.TextField(blank=False)
     # Product image was not in the initial diagram
