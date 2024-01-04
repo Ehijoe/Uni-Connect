@@ -9,6 +9,7 @@ class Store(models.Model):
     logo = models.ImageField(upload_to="logos")
     contactEmail = models.EmailField(max_length=100)
     contactPhone = models.CharField(max_length=15)
+    description = models.TextField(blank=False)
     address = models.TextField(blank=True)
 
     def __str__(self):
