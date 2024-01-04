@@ -1,9 +1,40 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-    
+    {{ store.brandName }}
 {% endblock %}
 
 {% block body %}
-    
+    <div class="store-header">
+        <img src="{{ store.logo }}" alt="{{ store.brandName }}">
+        <h1>{{ store.brandName }}</h1>
+    </div>
+
+    <div class="contact-details">
+        <ul>
+            <li>{{ store.contactEmail }}</li>
+            <li>{{ store.contactPhone }}</li>
+            {% if store.address %}
+                <li>{{ store.address }}</li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div class="store-description">
+        <p>{{ store.description }}</p>
+    </div>
+
+    <div class="store-categories">
+        {% for category in store.categories %}
+            <div class="store-category">
+                <h3>{{ category.categoryName }}</h3>
+                <div class="category-products">
+                    <div class="product">
+                        <img src="{{ product.image }}" alt="{{ product.productName }}">
+                        <a href="{% url 'store:product' productName=product.productName %}">{{ product.productName }}</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
