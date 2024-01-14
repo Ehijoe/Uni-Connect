@@ -5,29 +5,29 @@ from django.db import models
 
 class Store(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="stores")
-    brandName = models.CharField(max_length=64)
+    name = models.CharField(max_length=64)
     logo = models.ImageField(upload_to="logos")
-    contactEmail = models.EmailField(max_length=100)
-    contactPhone = models.CharField(max_length=15)
+    email = models.EmailField(max_length=100)
+    phone = models.CharField(max_length=15)
     description = models.TextField(blank=False)
     address = models.TextField(blank=True)
 
     def __str__(self):
-        return f"{self.brandName}"
+        return f"{self.name}"
     
 
 class Category(models.Model):
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name="categories")
-    categoryName = models.CharField(max_length=20)
+    name = models.CharField(max_length=20)
 
     def __str__(self):
-        return f"{self.categoryName}"
+        return f"{self.name}"
     
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products")
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name="products")
-    productName = models.CharField(max_length=64)
+    name = models.CharField(max_length=64)
     description = models.TextField(blank=False)
     # Product image was not in the initial diagram
     image = models.ImageField(upload_to="product_images")
@@ -35,4 +35,4 @@ class Product(models.Model):
     stock = models.PositiveIntegerField()
 
     def __str__(self):
-        return f"{self.productName}"
+        return f"{self.name}"
